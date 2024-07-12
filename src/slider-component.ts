@@ -21,7 +21,7 @@ export class SliderComponent {
         await this.toggleNumberLocator.click();
     }
 
-    async sliderThingy(valueAsPercent: number): Promise<void> {
+    async setValueBySlideInPercent(valueAsPercent: number): Promise<void> {
         const sliderBound = await this.page.locator(this.sliderSelector).boundingBox();
         const targetX = sliderBound.x + (sliderBound.width * await this.getCurrentValue() / 100);
         const targetY = sliderBound.y + sliderBound.height / 2;
@@ -37,6 +37,8 @@ export class SliderComponent {
     async setTheValueByInput(literalValue: number): Promise<void> {
         await this.toggleManualValueSet();
         await this.numberInputLocator.fill(literalValue.toString());
+        await this.numberInputLocator.press("Enter");
+        await this.numberInputLocator.waitFor({ state: 'hidden', timeout: 1000 })
     }
 
     async getCurrentValue(): Promise<number> {

@@ -34,8 +34,8 @@ export class ImagesSideBar {
         while (retryNumber < maxRetries) {
             let currentNumberOfImages: Number = await imageQuery.returnNumberOfImagesOnScreen();
             if (currentNumberOfImages > this.imagesNumber) {
-                console.log('Current number of images:', currentNumberOfImages);
                 this.imagesNumber = currentNumberOfImages;
+                console.log('Current number of images:', currentNumberOfImages);
                 break;
             }
             retryNumber++;
